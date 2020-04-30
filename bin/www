@@ -1,0 +1,2 @@
+#!/usr/bin/env NODE_ENV=production node
+require('../index.js');

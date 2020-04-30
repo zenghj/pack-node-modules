@@ -1,0 +1,9 @@
+{
+  "name": "pack-node-modules",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "pack": "./bin/www"
+  },
+  "license": "MIT"
+}
