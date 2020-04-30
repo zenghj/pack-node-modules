@@ -1,9 +1,18 @@
 {
   "name": "pack-node-modules",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "bin": {
     "pack": "./bin/www"
   },
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zenghj/pack-node-modules.git"
+  },
+  "author": "zenghj<zenghj@outlook.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zenghj/pack-node-modules/issues"
+  },
+  "homepage": "https://github.com/zenghj/pack-node-modules#readme"
 }
