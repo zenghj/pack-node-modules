@@ -28,6 +28,8 @@ function readJson(file) {
     } catch (e) {
 
     }
+  } else {
+    log(`${file} not exist!`)
   }
   return result
 }
@@ -41,6 +43,7 @@ function detectNodeModuleDependencies() {
     dependencies: packageJSON.dependencies,
     devDependencies: packageJSON.devDependencies
   })
+  log('cacheHashFilePath', cacheHashFilePath)
   const hash = getHash(depsContent)
   const lastHash = hashes[hashes.length - 1]
 
@@ -67,6 +70,7 @@ function detectNodeModuleDependencies() {
  * @param {*} successCb 
  */
 function packNodeModules(successCb) {
+  log('packNodeModules')
   exec('tar -czf node_modules.tar.gz node_modules').then(() => {
     console.log('node_modules.tar.gz ready!')
     successCb && successCb()
