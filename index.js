@@ -2,11 +2,13 @@ const cwd = process.cwd()
 // console.log(`Current directory: ${process.cwd()}`);
 const path = require('path')
 const fs = require('fs')
+const targz = require('targz');
 const { getHash } = require('./utils/get-hash')
 const util = require('util')
 const exec = util.promisify(require('child_process').exec);
-const packageJsonFilePath = path.resolve(cwd, 'package.json')
-const cacheHashFilePath = path.resolve(cwd, '.node_modules_hash.json')
+const targetProjectRootPath = cwd;
+const packageJsonFilePath = path.resolve(targetProjectRootPath, 'package.json')
+const cacheHashFilePath = path.resolve(targetProjectRootPath, '.node_modules_hash.json')
 const log = console.log
 
 function updateHashCache(hashes) {
@@ -71,13 +73,24 @@ function detectNodeModuleDependencies() {
  */
 function packNodeModules(successCb) {
   log('packNodeModules')
-  exec('tar -czf node_modules.tar.gz node_modules').then(() => {
-    console.log('node_modules.tar.gz ready!')
-    successCb && successCb()
-    process.exit()
-  }, (err) => {
-    throw err
-  })
+  targz.compress({
+    src: path.resolve(targetProjectRootPath, 'node_modules'),
+    dest: path.resolve(targetProjectRootPath, 'node_modules.tar.gz'),
+  }, function(err) {
+    if (err) {
+      throw err
+    } else {
+      successCb && successCb()
+      process.exit()
+    }
+  });
+  // exec('tar -czf node_modules.tar.gz node_modules').then(() => {
+  //   console.log('node_modules.tar.gz ready!')
+  //   successCb && successCb()
+  //   process.exit()
+  // }, (err) => {
+  //   throw err
+  // })
 }
 
 detectNodeModuleDependencies().then((updateHash) => {
