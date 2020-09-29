@@ -1,2 +1,6 @@
-#!/usr/bin/env NODE_ENV=production node
+#!/usr/bin/env node
 require('../index.js');
+
+/**
+ * 上面写成 #!/usr/bin/envNODE_ENV=production node 在ubantu机器上会卡住，不执行业务代码
+ */
