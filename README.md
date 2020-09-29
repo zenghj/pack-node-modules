@@ -13,7 +13,7 @@ config prebuild script to package node_modules (if it's necessary) before runnin
 ```json
 {
   "scripts": {
-    "prebuild": "pack",
+    "prebuild": "packit",
     "build": "build.sh",
   }
 }
